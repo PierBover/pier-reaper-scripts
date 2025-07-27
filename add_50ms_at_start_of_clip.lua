@@ -20,20 +20,23 @@ if totalItems > 0 then
 			-- get the take of the item (the audio bit contained in the clip)
 			local itemTake = reaper.GetActiveTake(item)
 
-			-- change take start offset in the audio
-			local itemAudioOffset = reaper.GetMediaItemTakeInfo_Value(itemTake, "D_STARTOFFS")
-			local newAudioOffset = itemAudioOffset - offset
-			reaper.SetMediaItemTakeInfo_Value(itemTake, "D_STARTOFFS", newAudioOffset)
+			-- if the item has an audio take...
+			if itemTake then
+				-- change take start offset in the audio
+				local itemAudioOffset = reaper.GetMediaItemTakeInfo_Value(itemTake, "D_STARTOFFS")
+				local newAudioOffset = itemAudioOffset - offset
+				reaper.SetMediaItemTakeInfo_Value(itemTake, "D_STARTOFFS", newAudioOffset)
 
-			-- change item length
-			local length = reaper.GetMediaItemInfo_Value(item, "D_LENGTH")
-			local newLength = length + offset
-			reaper.SetMediaItemInfo_Value(item, "D_LENGTH", newLength)
+				-- change item length
+				local length = reaper.GetMediaItemInfo_Value(item, "D_LENGTH")
+				local newLength = length + offset
+				reaper.SetMediaItemInfo_Value(item, "D_LENGTH", newLength)
 
-			-- change item start time
-			local startTime = reaper.GetMediaItemInfo_Value(item, "D_POSITION")
-			local newStartTime = startTime - offset
-			reaper.SetMediaItemInfo_Value(item, "D_POSITION", newStartTime)
+				-- change item start time
+				local startTime = reaper.GetMediaItemInfo_Value(item, "D_POSITION")
+				local newStartTime = startTime - offset
+				reaper.SetMediaItemInfo_Value(item, "D_POSITION", newStartTime)
+			end
 		end
 	end
 end
