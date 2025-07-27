@@ -1,12 +1,10 @@
--- this script adds 50ms to the start of audio clips
--- it offsets the audio in a clip by a certain amount
+-- this script adds 50ms to the start of audio clips so the clip starts sooner by 50ms
 -- then enlarges the clip so the ending of the clip remains the same
 -- finally it moves the clip so that the initial position of the audio remains the same
 
-
 -- get the total items in the project
 local totalItems = reaper.CountMediaItems(0)
--- the offset we want to apply in seconds
+-- the offset we want to apply in seconds so this is 50ms
 local offset = 0.050
 
 if totalItems > 0 then
@@ -20,12 +18,12 @@ if totalItems > 0 then
 		if reaper.IsMediaItemSelected(item) then
 
 			-- get the take of the item (the audio bit contained in the clip)
-			local take = reaper.GetActiveTake(item)
+			local itemTake = reaper.GetActiveTake(item)
 
 			-- change take start offset in the audio
-			local clipOffset = reaper.GetMediaItemTakeInfo_Value(take, "D_STARTOFFS")
-			local newClipOffset = clipOffset - offset
-			reaper.SetMediaItemTakeInfo_Value(take, "D_STARTOFFS", newClipOffset)
+			local itemAudioOffset = reaper.GetMediaItemTakeInfo_Value(itemTake, "D_STARTOFFS")
+			local newAudioOffset = itemAudioOffset - offset
+			reaper.SetMediaItemTakeInfo_Value(itemTake, "D_STARTOFFS", newAudioOffset)
 
 			-- change item length
 			local length = reaper.GetMediaItemInfo_Value(item, "D_LENGTH")
