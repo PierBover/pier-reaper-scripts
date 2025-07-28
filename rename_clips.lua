@@ -10,6 +10,7 @@ if ok then
 	if totalItems > 0 then
 
 		local addSerial = reaper.MB("", "Add a sequential number after the name?", 4)
+		local serialCounter = 1
 
 		--reaper.ShowConsoleMsg(addSerial)
 
@@ -23,13 +24,15 @@ if ok then
 				local newName = name
 
 				if addSerial == 6 then
-					newName = newName .. (i + 1)
+					newName = newName .. serialCounter
 				end
 
 				-- get the item take
 				local itemTake = reaper.GetActiveTake(item)
 				-- change the name
 				reaper.GetSetMediaItemTakeInfo_String(itemTake, "P_NAME", newName, true)
+
+				serialCounter = serialCounter + 1
 			end
 		end
 	end
