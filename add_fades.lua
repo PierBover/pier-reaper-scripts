@@ -1,13 +1,8 @@
--- add fades to the selected items
+-- this script adds fades to the selected items
 
--- splits a CSV string
-function SplitString (s)
-	local values = {}
-	for match in string.gmatch(s, "([^,]*)") do
-		table.insert(values, match)
-	end
-	return values
-end
+-- import the utils.lua file
+package.path = debug.getinfo(1, "S").source:sub(2):match("(.*/)") .. "?.lua"
+local utils = require("utils")
 
 -- ask user for values
 local title = "Fade Parameters"
@@ -16,7 +11,7 @@ local defaults = "5,100"
 local ok, values = reaper.GetUserInputs(title, 2, captions, defaults)
 
 if ok then
-	local userValues = SplitString(values)
+	local userValues = utils.splitString(values)
 
 	-- get the total items in the project
 	local totalItems = reaper.CountMediaItems(0)
