@@ -6,7 +6,7 @@ local utils = require("utils")
 
 -- ask user for values
 local title = "Fade Parameters"
-local captions = "Fade-in time (ms),Fade-in shape,Fade-out time (ms), Fade-out shape"
+local captions = "Fade-in time (ms),Fade-in shape,Fade-out time (ms),Fade-out shape"
 local defaults = "5,0,100,0"
 local ok, values = reaper.GetUserInputs(title, 4, captions, defaults)
 
