@@ -6,9 +6,9 @@ local utils = require("utils")
 
 -- ask user for values
 local title = "Fade Parameters"
-local captions = "Fade-in (ms),Fade-out (ms)"
-local defaults = "5,100"
-local ok, values = reaper.GetUserInputs(title, 2, captions, defaults)
+local captions = "Fade-in time (ms),Fade-in shape,Fade-out time (ms), Fade-out shape"
+local defaults = "5,0,100,0"
+local ok, values = reaper.GetUserInputs(title, 4, captions, defaults)
 
 if ok then
 	local userValues = utils.splitString(values)
@@ -18,11 +18,11 @@ if ok then
 
 	-- fade times in seconds
 	local fadeInTime = tonumber(userValues[1]) / 1000
-	local fadeOutTime = tonumber(userValues[2]) / 1000
+	local fadeOutTime = tonumber(userValues[3]) / 1000
 
 	-- fade shapes 0=linear
-	local fadeInShape = 0
-	local fadeOutShape = 0
+	local fadeInShape = tonumber(userValues[2])
+	local fadeOutShape = tonumber(userValues[4])
 
 	if totalItems > 0 then
 		-- iterate over all the items
