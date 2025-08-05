@@ -40,11 +40,11 @@ if ok then
 			-- if the item is currently selected...
 			-- this is recommended in the docs over using GetSelectedMediaItem as it's slower
 			if reaper.IsMediaItemSelected(item) then
-				-- fade in
+				-- FADE IN
 				if fadeInTime ~= nil then reaper.SetMediaItemInfo_Value(item, "D_FADEINLEN", fadeInTime) end
 				if fadeInShape ~= nil then reaper.SetMediaItemInfo_Value(item, "C_FADEINSHAPE", fadeInShape) end
 
-				-- fade out
+				-- FADE OUT
 				if fadeOutTime ~= nil then reaper.SetMediaItemInfo_Value(item, "D_FADEOUTLEN", fadeOutTime) end
 				if fadeOutShape ~= nil then reaper.SetMediaItemInfo_Value(item, "C_FADEOUTSHAPE", fadeOutShape) end
 			end
